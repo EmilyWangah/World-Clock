@@ -24,3 +24,25 @@ windhoekTimeElement.innerHTML = windhoekTime.format(
 
 setInterval(updateTime ,1);
 updateTime();
+
+function updateCity(event){
+let cityTimeZone = event.target.value;
+let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+let cityTime = moment().tz(cityTimeZone);
+let citiesElement = document.querySelector("#cities");
+citiesElement.innerHTML = `
+<div class="city" id="los-angeles">
+            <div>
+            <h2>${cityName}</h2>
+            <div class="date">${cityTime.format("MMM Do YYYY")}</div>
+            </div>
+            <div class="time">${cityTime.format("h:mm:ss:SS")} 
+                <small>">${cityTime.format(
+                    "A"
+                )}</small></div>
+        </div>`
+;}
+
+let citiesSelectElement = document.querySelector("#city");
+
+citiesSelectElement.addEventListener("change", updateCity);
